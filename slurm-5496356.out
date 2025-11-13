@@ -1,0 +1,25 @@
+WARNING: Method definition rrule(typeof(Base.merge), NamedTuple{F1, T} where T<:Tuple, NamedTuple{F2, T} where T<:Tuple) where {F1, F2} in module ChainRules at /home/astro/phupfb/.julia/packages/ChainRules/14CDN/src/rulesets/Base/base.jl:347 overwritten in module Lux at /home/astro/phupfb/.julia/packages/Lux/68T9j/src/chainrules.jl:17.
+ERROR: Method overwriting is not permitted during Module precompilation. Use `__precompile__(false)` to opt-out of precompilation.
+WARNING: Method definition rrule(typeof(Base.merge), T1, T2) where {T1<:(NamedTuple{names, T} where T<:Tuple where names), T2<:(NamedTuple{names, T} where T<:Tuple where names)} in module Lux at /home/astro/phupfb/.julia/packages/Lux/68T9j/src/chainrules.jl:17 overwritten in module ChainRules at /home/astro/phupfb/.julia/packages/ChainRules/14CDN/src/rulesets/Base/base.jl:347.
+ERROR: Method overwriting is not permitted during Module precompilation. Use `__precompile__(false)` to opt-out of precompilation.
+ERROR: LoadError: InexactError: Float64(0.3903577709314921 + 0.0013278005676369202im)
+Stacktrace:
+ [1] Real
+   @ ./complex.jl:44 [inlined]
+ [2] convert
+   @ ./number.jl:7 [inlined]
+ [3] push!
+   @ ./array.jl:1118 [inlined]
+ [4] _rpi_A2B_matrix(cgen::RepLieGroups.O3.Rot3DCoeffs_real{0, ComplexF64}, spec::Vector{Vector{@NamedTuple{n::Int64, l::Int64, m::Int64}}})
+   @ EquivariantModels ~/.julia/packages/EquivariantModels/MGMmH/src/builder.jl:135
+ [5] _generate_ace_model(rbasis::ACEpotentials.Models.SplineRnlrzzBasis{1, ACEpotentials.Models.NormalizedTransform{Float64, ACEpotentials.Models.GeneralizedAgnesiTransform{Float64}}, ACEpotentials.Models.PolyEnvelope2sX{Float64}, 91, Float64}, Ytype::Symbol, AA_spec::Vector{Vector{@NamedTuple{n::Int64, l::Int64, m::Int64}}}, Vref::ACEpotentials.Models.OneBody{Float64, Unitful.FreeUnits{(), NoDims, nothing}, Unitful.FreeUnits{(Å,), 𝐋, nothing}}, level::ACEpotentials.Models.TotalDegree, pair_basis::ACEpotentials.Models.SplineRnlrzzBasis{1, ACEpotentials.Models.NormalizedTransform{Float64, ACEpotentials.Models.GeneralizedAgnesiTransform{Float64}}, ACEpotentials.Models.ACE1_PolyEnvelope1sR{Float64}, 16, Float64})
+   @ ACEpotentials.Models ~/.julia/packages/ACEpotentials/lI0MC/src/models/ace.jl:108
+ [6] ace_model(rbasis::ACEpotentials.Models.SplineRnlrzzBasis{1, ACEpotentials.Models.NormalizedTransform{Float64, ACEpotentials.Models.GeneralizedAgnesiTransform{Float64}}, ACEpotentials.Models.PolyEnvelope2sX{Float64}, 91, Float64}, Ytype::Symbol, AA_spec::Vector{Vector{@NamedTuple{n::Int64, l::Int64, m::Int64}}}, level::ACEpotentials.Models.TotalDegree, pair_basis::ACEpotentials.Models.SplineRnlrzzBasis{1, ACEpotentials.Models.NormalizedTransform{Float64, ACEpotentials.Models.GeneralizedAgnesiTransform{Float64}}, ACEpotentials.Models.ACE1_PolyEnvelope1sR{Float64}, 16, Float64}, Vref::ACEpotentials.Models.OneBody{Float64, Unitful.FreeUnits{(), NoDims, nothing}, Unitful.FreeUnits{(Å,), 𝐋, nothing}})
+   @ ACEpotentials.Models ~/.julia/packages/ACEpotentials/lI0MC/src/models/ace.jl:155
+ [7] ace_model(; elements::Vector{Symbol}, order::Int64, Ytype::Symbol, ZBL::Bool, E0s::Nothing, rin0cuts::StaticArraysCore.SMatrix{1, 1, @NamedTuple{rin::Float64, r0::Float64, rcut::Float64}, 1}, rbasis::ACEpotentials.Models.SplineRnlrzzBasis{1, ACEpotentials.Models.NormalizedTransform{Float64, ACEpotentials.Models.GeneralizedAgnesiTransform{Float64}}, ACEpotentials.Models.PolyEnvelope2sX{Float64}, 91, Float64}, rbasis_type::Symbol, maxl::Int64, maxn::Int64, maxq_fact::Float64, maxq::Symbol, init_Wradial::Symbol, level::ACEpotentials.Models.TotalDegree, max_level::Vector{Int64}, init_WB::Symbol, pair_maxn::Nothing, pair_basis::ACEpotentials.Models.SplineRnlrzzBasis{1, ACEpotentials.Models.NormalizedTransform{Float64, ACEpotentials.Models.GeneralizedAgnesiTransform{Float64}}, ACEpotentials.Models.ACE1_PolyEnvelope1sR{Float64}, 16, Float64}, pair_learnable::Bool, pair_transform::Tuple{Symbol, Int64, Int64}, init_Wpair::Symbol, rng::Random.TaskLocalRNG)
+   @ ACEpotentials.Models ~/.julia/packages/ACEpotentials/lI0MC/src/models/ace_heuristics.jl:219
+ [8] ace1_model(; kwargs::@Kwargs{elements::Vector{Symbol}, totaldegree::Int64, order::Int64, rcut::Float64})
+   @ ACEpotentials.ACE1compat ~/.julia/packages/ACEpotentials/lI0MC/src/ace1_compat.jl:406
+ [9] top-level scope
+   @ /storage/astro2/phupfb/PhD/acestuff/new_ACE/high_entropy_POPS.jl:8
+in expression starting at /storage/astro2/phupfb/PhD/acestuff/new_ACE/high_entropy_POPS.jl:6
