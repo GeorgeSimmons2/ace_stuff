@@ -1,0 +1,50 @@
+WARNING: Method definition rrule(typeof(Base.merge), NamedTuple{F1, T} where T<:Tuple, NamedTuple{F2, T} where T<:Tuple) where {F1, F2} in module ChainRules at /home/astro/phupfb/.julia/packages/ChainRules/14CDN/src/rulesets/Base/base.jl:347 overwritten in module Lux at /home/astro/phupfb/.julia/packages/Lux/68T9j/src/chainrules.jl:17.
+ERROR: Method overwriting is not permitted during Module precompilation. Use `__precompile__(false)` to opt-out of precompilation.
+WARNING: Method definition rrule(typeof(Base.merge), T1, T2) where {T1<:(NamedTuple{names, T} where T<:Tuple where names), T2<:(NamedTuple{names, T} where T<:Tuple where names)} in module Lux at /home/astro/phupfb/.julia/packages/Lux/68T9j/src/chainrules.jl:17 overwritten in module ChainRules at /home/astro/phupfb/.julia/packages/ChainRules/14CDN/src/rulesets/Base/base.jl:347.
+ERROR: Method overwriting is not permitted during Module precompilation. Use `__precompile__(false)` to opt-out of precompilation.
+   Resolving package versions...
+  No Changes to `/gpfs/home/astro/phupfb/new_ACE/ace_stuff/Project.toml`
+  No Changes to `/gpfs/home/astro/phupfb/new_ACE/ace_stuff/Manifest.toml`
+┌ Warning: Circular dependency detected.
+│ Precompilation will be skipped for dependencies in this cycle:
+│  ┌ IntervalSets → IntervalSetsRandomExt
+│  └─ IntervalSets → IntervalSetsPrintfExt
+│ Precompilation will also be skipped for the following, which depend on the above cycle:
+│   ImageIO
+│   ImageAxes
+│   CairoMakie
+│   ConstructionBase → ConstructionBaseIntervalSetsExt
+│   IntervalArithmetic → IntervalArithmeticIntervalSetsExt
+│   Makie
+│   Accessors → IntervalSetsExt
+│   AxisArrays
+│   IntervalSets → IntervalSetsRecipesBaseExt
+│   Netpbm
+│   IntervalSets → IntervalSetsStatisticsExt
+│   ImageMetadata
+└ @ Pkg.API.Precompilation /gpfs/home/astro/phupfb/.julia/juliaup/julia-1.10.10+0.x64.linux.gnu/share/julia/stdlib/v1.10/Pkg/src/precompilation.jl:583
+Precompiling packages...
+   1927.7 ms  ? Lux → LuxZygoteExt
+   8261.0 ms  ? ACEpotentials
+┌ Warning: Found `resolution` in the theme when creating a `Scene`. The `resolution` keyword for `Scene`s and `Figure`s has been deprecated. Use `Figure(; size = ...` or `Scene(; size = ...)` instead, which better reflects that this is a unitless size and not a pixel resolution. The key could also come from `set_theme!` calls or related theming functions.
+└ @ Makie ~/.julia/packages/Makie/4JW9B/src/scenes.jl:264
+ERROR: LoadError: ArgumentError: 
+    Conversion failed for Lines (With conversion trait PointBased()) with args:
+        NTuple{4, Float64} 
+    Got converted to: NTuple{4, Float64}
+    Lines requires to convert to argument types Tuple{AbstractVector{<:Union{Point2, Point3}}}, which convert_arguments didn't succeed in.
+    To fix this overload convert_arguments(P, args...) for Lines or PointBased() and return an object of type Tuple{AbstractVector{<:Union{Point2, Point3}}}.`
+
+Stacktrace:
+ [1] argument_error(PTrait::PointBased, P::Type, args::NTuple{4, Float64}, user_kw::Dict{Symbol, Any}, converted::NTuple{4, Float64})
+   @ Makie ~/.julia/packages/Makie/4JW9B/src/compute-plots.jl:698
+ [2] (Lines)(user_args::NTuple{4, Float64}, user_attributes::Dict{Symbol, Any})
+   @ Makie ~/.julia/packages/Makie/4JW9B/src/compute-plots.jl:746
+ [3] _create_plot!(::Function, ::Dict{Symbol, Any}, ::Axis, ::Float64, ::Vararg{Float64})
+   @ Makie ~/.julia/packages/Makie/4JW9B/src/figureplotting.jl:397
+ [4] lines!(::Axis, ::Vararg{Any}; kw::@Kwargs{color::Symbol, linestyle::Symbol, label::String})
+   @ Makie ~/.julia/packages/Makie/4JW9B/src/recipes.jl:521
+ [5] top-level scope
+   @ /gpfs/home/astro/phupfb/new_ACE/ace_stuff/err_test.jl:39
+in expression starting at /gpfs/home/astro/phupfb/new_ACE/ace_stuff/err_test.jl:39
+RMSE = 0.01404578714129627

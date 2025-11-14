@@ -10,7 +10,23 @@
 # committee, dΘ = sample_hypercube(hypercube_eigs, hypercube_bounds, lin_params)
 # co_ps_vec = [committee[:,i] for i = 1:size(committee,2)]
 # ACEpotentials.Models.set_committee!(model, co_ps_vec)
+using Pkg; Pkg.add("AtomsCalculators")
+using ACEpotentials, DelimitedFiles, ExtXYZ, AtomsCalculators, LinearAlgebra
+Pkg.add("Unitful")
+using Unitful
+suffix = "_17_4"
+model, _ = ACEpotentials.load_model("./big_ACE/model$(suffix).json")
+A = readdlm("./big_ACE/A$(suffix).csv", ',')
+Y = readdlm("./big_ACE/Y$(suffix).csv", ',')
+W = readdlm("./big_ACE/W$(suffix).csv", ',')
+P = readdlm("./big_ACE/P$(suffix).csv", ',')
 
+Y = Y[:,1]
+W = W[:,1]
+Ap= Diagonal(W) * A / P
+Y = W .* Y
+lin_params = P \ (Ap \ Y)
+ACEpotentials.Models.set_linear_parameters!(model, lin_params)
 test = ExtXYZ.load("high_entropy_pops/manual_df_test_Al.xyz")
 test_E = []
 test_E_predictions = []
@@ -22,24 +38,20 @@ for (i, at) in enumerate(test)
         energy = at[:dft_energy]
   
         push!(test_E, energy)
-        E, co_E= @committee AtomsCalculators.potential_energy(at, model)
-        push!(test_E_predictions, ustrip(E) - energy)
-        push!(test_co_E_predictions, ustrip.(co_E) .- ustrip(E))
-        push!(co_E_range, abs(maximum(ustrip.(co_E)) - minimum(ustrip.(co_E))))
-        if (ustrip(E) > minimum(ustrip.(co_E)) && ustrip(E) < maximum(ustrip.(co_E)))
-            counter += 1
-        else
-            ev_val +=  1
-            counter += 1
-        end
+        E = ustrip(AtomsCalculators.potential_energy(at, model))
+	push!(test_E, E)
     catch
     end
     
 end
+using Statistics
+itr = test_E
+RMSE_ = sqrt.(sum(abs2.(itr .- mean(itr))) / (length(itr) - 1))
+writedlm("./big_ACE/test_errors_$(RMSE_)_$(suffix).csv", test_E, ',')
 # ev_val /= counter
 # ev_val *= 100
-
-# using CairoMakie
+Pkg.add("CairoMakie")
+using CairoMakie
 
 # Create figure and axis
 fig = CairoMakie.Figure()
@@ -49,7 +61,7 @@ ax = CairoMakie.Axis(fig[1, 1],
 )
 
 # Data
-xdata = abs.(test_E_predictions)
+xdata = abs.(test_E)
 ydata = co_E_range ./ 2
 
 # Scatter plot

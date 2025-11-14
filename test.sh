@@ -7,4 +7,4 @@
 module purge
 module load GCC/11.3.0
 
-julia --project=. test.jl
+julia --project=. err_test.jl
