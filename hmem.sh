@@ -4,9 +4,9 @@
 #SBATCH --cpus-per-task=10
 #SBATCH --partition=hmem
 #SBATCH --mem-per-cpu=32000
-#SBATCH --time=20:00:00
+#SBATCH --time=2:00:00
 
 module purge
 module load GCC/13.2.0
 
-julia --project=. bulk_mod.jl
+julia --project=. POPS_err.jl
